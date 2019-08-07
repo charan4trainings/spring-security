@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<title>Spring Security</title>
+<meta charset="utf-8" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container">
+		<div th:fragment="logout" class="logout" sec:authorize="isAuthenticated()">
+			<div class="row">
+				<div class="col-md-6" align="left">
+					Logged in user: <span sec:authentication="name">User</span> has Roles:	<span sec:authentication="principal.authorities">Role</span>
+				</div>
+				<div class="col-md-6" align="right">
+					<form th:action="@{/logout}" method="post">
+						<input type="submit" value="Logout" class="btn btn-danger" />
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<a class="btn btn-primary" th:href="@{/}">Home</a>&nbsp;&nbsp;<a class="btn btn-primary" sec:authorize="hasRole('ADMIN')" th:href="@{/addProduct}">Add Product</a>
+		</div>
+		<div class="row">
+		<h1>Products</h1>
+		<table class="table table-striped table-bordered thead-dark">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Price</th>
+					<th>Mfg Date</th>
+					<th>Exp Date</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="product: ${products}">
+					<td th:text="${product.name}" />
+					<td th:text="${product.price}" />
+					<td th:text="${product.mfgDate}" />
+					<td th:text="${product.expDate}" />
+				</tr>
+			</tbody>
+		</table>
+		</div>
+	</div>
+</body>
+</html>

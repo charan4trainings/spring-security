@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<title>Spring Security</title>
+<meta charset="utf-8" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container">
+		<div th:fragment="logout" class="logout"
+			sec:authorize="isAuthenticated()">
+			<div class="row">
+				<div class="col-md-6" align="left">
+					Logged in User: <span sec:authentication="name">User</span> has
+					Authorities: <span sec:authentication="principal.authorities">Role</span>
+				</div>
+				<div class="col-md-6" align="right">
+					<form th:action="@{/logout}" method="post">
+						<input type="submit" value="Logout" class="btn btn-danger" />
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<h1>Welcome to Marvel Products</h1>
+			<p>
+				<a class="btn btn-primary" th:href="@{/viewProducts}">View
+					Products</a>&nbsp; <a class="btn btn-primary"
+					sec:authorize="hasAuthority('ADMIN')" th:href="@{/viewUsers}">View
+					Users</a>&nbsp; <a class="btn btn-primary"
+					sec:authorize="hasAuthority('ADMIN')" th:href="@{/addProduct}">Add
+					Product</a>
+			</p>
+		</div>
+	</div>
+</body>
+</html>
