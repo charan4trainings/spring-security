@@ -1,0 +1,41 @@
+dn: ou=groups,dc=verizon,dc=com
+objectclass: top
+objectclass: organizationalUnit
+ou: groups
+ 
+dn: ou=people,dc=verizon,dc=com
+objectclass: top
+objectclass: organizationalUnit
+ou: people
+ 
+dn: uid=jsmith,ou=people,dc=verizon,dc=com
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: John Smith
+sn: Smith
+uid: jsmith
+userPassword: password
+
+dn: uid=wsmith,ou=people,dc=verizon,dc=com
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Will Smith
+sn: Smith
+uid: wsmith
+userPassword: geminiman
+ 
+dn: cn=admin,ou=groups,dc=verizon,dc=com
+objectclass: top
+objectclass: groupOfNames
+cn: admin
+member: uid=wsmith,ou=people,dc=verizon,dc=com
+ 
+dn: cn=user,ou=groups,dc=verizon,dc=com
+objectclass: top
+objectclass: groupOfNames
+cn: user
+member: uid=jsmith,ou=people,dc=verizon,dc=com
